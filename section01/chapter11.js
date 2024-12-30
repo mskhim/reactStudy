@@ -13,3 +13,4 @@ const f= ({name,age})=>{
     console.log(name,age);
 }
 f(person);
+//1스프레드 연산자
