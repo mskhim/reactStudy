@@ -1,15 +1,16 @@
 import { useState } from "react";
 import "./App.css";
-import MainCount from "./component/MainCount";
-import CountButton from "./component/Countbutton";
+import CalViewer from "./component/CalViewer";
+import CalController from "./component/CalController";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState("");
+  const [cal, setCal] = useState(0);
   return (
     <>
-      <h1>카운터앱</h1>
-      <MainCount count={count} />
-      <CountButton setCount={setCount} />
+      <h1>계산기</h1>
+      <CalViewer cal={cal} />
+      <CalController setCount={setCount} setCal={setCal} count={count} />
     </>
   );
 }

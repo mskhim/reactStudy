@@ -1,23 +1,23 @@
 const CountButton = ({ setCount }) => {
   const onClick = (e) => {
-    setCount((data) => (data = data + parseInt([e.target.name], 10)));
+    setCount((data) => (data = data + parseInt([e.target.value], 10)));
   };
 
   return (
     <>
-      <button name="-100" onClick={onClick}>
+      <button onClick={onClick} value="-100">
         -100
       </button>
-      <button name="-10" onClick={onClick}>
+      <button onClick={onClick} value="-10">
         -10
       </button>
-      <button name="0" onClick={onClick}>
+      <button onClick={onClick} value="0">
         0
       </button>
-      <button name="10" onClick={onClick}>
+      <button onClick={onClick} value="10">
         10
       </button>
-      <button name="100" onClick={onClick}>
+      <button onClick={onClick} value="-100">
         100
       </button>
     </>
