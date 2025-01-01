@@ -1,0 +1,156 @@
+/* 전체 테이블 스타일 */
+table {
+  width: 1000px;
+  border-collapse: collapse; /* 중복 테두리 제거 */
+  margin: 20px auto; /* 중앙 정렬 */
+  font-family: Arial, sans-serif;
+  background-color: #ffffff; /* 배경색을 흰색으로 변경 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 더 부드럽게 */
+  border-radius: 8px; /* 테이블 테두리 둥글게 */
+  overflow: hidden; /* 테두리 둥근 모양 유지 */
+}
+
+/* 테이블 헤더 스타일 */
+th {
+  background-color: #0066cc; /* 헤더 배경색 진하게 */
+  color: #ffffff; /* 헤더 글자색 흰색 */
+  text-align: center; /* 헤더 텍스트 중앙 정렬 */
+  padding: 15px;
+  font-size: 16px;
+}
+
+/* 테이블 데이터 셀 스타일 */
+td {
+  border: 1px solid #dddddd; /* 셀 테두리 밝게 */
+  padding: 12px 10px; /* 내부 여백 추가 */
+  font-size: 14px;
+  text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+/* 테이블 행 스타일 */
+tr:nth-child(even) {
+  background-color: #f9f9f9; /* 짝수 행 배경색 */
+}
+
+tr:nth-child(odd) {
+  background-color: #ffffff; /* 홀수 행 배경색 */
+}
+
+tr:hover {
+  background-color: #e6f2ff; /* 행 호버 시 부드러운 파란색 배경 */
+  cursor: pointer; /* 포인터 모양 */
+}
+
+/* 첫 번째 열 너비 조정 */
+table th:first-child,
+table td:first-child {
+  width: 60%; /* 첫 번째 열 더 넓게 */
+}
+
+/* 버튼 스타일 */
+button {
+  width: 60px; /* 버튼 크기 확대 */
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px; /* 둥근 버튼 */
+  background-color: #007bff; /* 버튼 배경색 */
+  color: #ffffff; /* 버튼 글자색 */
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* 부드러운 애니메이션 */
+  margin-left: 10px; /* 버튼 간 간격 */
+}
+
+button:hover {
+  background-color: #0056b3; /* 호버 시 배경색 진하게 */
+  transform: scale(1.05); /* 호버 시 살짝 확대 */
+}
+
+button:active {
+  background-color: #003d80; /* 클릭 시 배경색 어둡게 */
+  transform: scale(0.95); /* 클릭 시 살짝 축소 */
+}
+
+/* 텍스트 입력 필드 스타일 */
+textarea {
+  width: 95%; /* 넓이 조정 */
+  height: 120px;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #dddddd; /* 테두리 색 */
+  resize: none; /* 크기 조정 비활성화 */
+  margin: 10px auto;
+  display: block; /* 중앙 정렬 */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+textarea:focus {
+  border-color: #007bff; /* 포커스 시 테두리 색상 변경 */
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* 포커스 시 그림자 추가 */
+  outline: none; /* 기본 포커스 제거 */
+}
+
+.insertPage {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin: 0 auto; /* 가운데 정렬 */
+  padding: 20px; /* 내부 여백 추가 */
+  border: 1px solid #ccc; /* 테두리 추가 */
+  border-radius: 10px; /* 테두리 둥글게 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+  background-color: #f9f9f9; /* 배경색 추가 */
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px; /* 간격 추가 */
+  align-items: center; /* 수직 중앙 정렬 */
+  margin: 0 auto; /* 가운데 정렬 */
+  padding: 20px; /* 내부 여백 추가 */
+  width: 500px;
+  
+}
+
+
+
+.search > input {
+  flex: 1;
+  margin-left: 10px;
+  border-radius: 5px;
+  padding: 10px 10px; /* 여백 추가 */
+  border: 1px solid #ddd;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search > input:focus {
+  border-color: #007bff; /* 포커스 시 테두리 색 변경 */
+}
+
+
+
+.insertPage > textarea:focus {
+  border-color: #007bff; /* 포커스 시 테두리 색 변경 */
+}
+
+.search > button {
+  width: 100px; /* 버튼 크기 확대 */
+  padding: 8px 0;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff; /* 버튼 배경색 */
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  align-self: flex-end; /* 오른쪽 정렬 */
+  transition: background-color 0.3s ease;
+margin-left: 10px;
+}
+
+.search > button:hover {
+  background-color: #0056b3; /* 호버 시 색상 변경 */
+}

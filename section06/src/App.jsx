@@ -5,12 +5,16 @@ import CalController from "./component/CalController";
 
 function App() {
   const [count, setCount] = useState("");
-  const [cal, setCal] = useState(0);
+  const [cal, setCal] = useState("");
   return (
     <>
-      <h1>계산기</h1>
       <CalViewer cal={cal} />
-      <CalController setCount={setCount} setCal={setCal} count={count} />
+      <CalController
+        setCount={setCount}
+        setCal={setCal}
+        count={count}
+        cal={cal}
+      />
     </>
   );
 }

@@ -1,7 +1,19 @@
-const CalController = ({ setCount, setCal, count }) => {
+const CalController = ({ setCount, setCal, count, cal }) => {
   const onClick = (e) => {
-    setCount((data) => (data = data + [e.target.value]));
-    setCal(e.target.value);
+    setCount(
+      (data) => (data = e.target.value === "c" ? "" : data + [e.target.value])
+    );
+    const newValue = e.target.value;
+    let view = newValue === "c" ? "" : cal + newValue;
+    if (
+      newValue === "*" ||
+      newValue === "/" ||
+      newValue === "-" ||
+      newValue === "+"
+    ) {
+      view = "";
+    }
+    setCal(view);
     console.log(count);
   };
 
@@ -55,11 +67,17 @@ const CalController = ({ setCount, setCal, count }) => {
         </button>
       </div>
       <div>
-        <button onClick={onClick} value="/">
-          /
-        </button>
         <button onClick={onCal} value="=">
           =
+        </button>
+        <button onClick={onClick} value="0">
+          0
+        </button>
+        <button onClick={onClick} value="c">
+          c
+        </button>
+        <button onClick={onClick} value="/">
+          /
         </button>
       </div>
     </>

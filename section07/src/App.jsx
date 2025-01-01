@@ -11,7 +11,7 @@ function App() {
       isMount.current = true;
       return;
     } else {
-      console.log;
+      console.log("마운트");
     }
     return () => {
       console.log("end");

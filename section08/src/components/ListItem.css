@@ -1,0 +1,27 @@
+.listItem {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgb(138, 138, 138);
+  margin-bottom: 10px;
+  line-height: 28px;
+  }
+
+
+.listItem > .content{
+flex: 1;
+}
+
+.listItem > .date{
+  color: rgb(170, 170, 170);
+  font-size: 13px;
+  }
+  .listItem > button{
+color: gray;
+border: none;
+padding: 5px;
+font-size: 13px;
+border-radius: 5px;
+cursor: pointer;
+  }

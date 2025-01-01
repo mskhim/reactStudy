@@ -1,7 +1,9 @@
 const CalViewer = ({ cal }) => {
   return (
     <>
-      <h1>{cal}</h1>
+      <div className="view">
+        <h1>{cal}</h1>
+      </div>
     </>
   );
 };
