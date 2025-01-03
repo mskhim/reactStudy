@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { memo } from "react";
+import { boardStateContext } from "../App";
+import { boardDispatchContext } from "../App";
 
-const SelectList = ({ id, name, content, date, onDelete, onUpdate }) => {
+const SelectList = ({ id, name, content, date }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [updateContent, setUpdatecontent] = useState("");
+  const { onDelete, onUpdate } = useContext(boardDispatchContext);
+
   const toggleEdit = () => {
     setIsEditing((data) => !data);
   };
@@ -53,4 +58,20 @@ const SelectList = ({ id, name, content, date, onDelete, onUpdate }) => {
   );
 };
 
-export default SelectList;
+// export default memo(SelectList, (prevProps, nextProps) => {
+//   //return false면 리랜더링 발생
+//   if (prevProps.id !== nextProps.id) {
+//     return false;
+//   }
+//   if (prevProps.name !== nextProps.name) {
+//     return false;
+//   }
+//   if (prevProps.content !== nextProps.content) {
+//     return false;
+//   }
+//   if (prevProps.date !== nextProps.date) {
+//     return false;
+//   }
+//   return true;
+// });
+export default memo(SelectList);

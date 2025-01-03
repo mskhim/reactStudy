@@ -1,0 +1,23 @@
+.cbt{
+  background-color: gray;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  padding:12px 20px;
+  transition: 0.5s;
+}
+.cbt:hover{
+  background-color: black;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  padding:13px 21px;
+  color: white;
+}
+.cbt_1{
+  background-color: gray;
+}

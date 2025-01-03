@@ -1,0 +1,10 @@
+@font-face {
+    font-family: "NanumPenScript";
+    src: url('/NanumPenScript-Regular.ttf');
+}
+body{
+    font-family: "NanumPenScript";
+}
+button {
+    font-family: 'NanumPenScript', cursive !important;
+  }

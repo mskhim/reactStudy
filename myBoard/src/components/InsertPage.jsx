@@ -1,7 +1,9 @@
-import { useRef, useState } from "react";
+import { useRef, useState, memo, useContext } from "react";
 import "./insertPage.css";
+import { boardDispatchContext } from "../App";
 
-const InsertPage = ({ onInsert }) => {
+const InsertPage = () => {
+  const { onInsert } = useContext(boardDispatchContext);
   const [contents, setContents] = useState("");
   const [writer, setWriter] = useState("");
   const ref1 = useRef();
@@ -53,4 +55,4 @@ const InsertPage = ({ onInsert }) => {
     </div>
   );
 };
-export default InsertPage;
+export default memo(InsertPage);

@@ -1,4 +1,4 @@
-import { useReducer, useRef, useState } from "react";
+import { useReducer, useRef, useCallback, createContext, useMemo } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import InsertPage from "./components/InsertPage";
@@ -22,6 +22,10 @@ function reducer(state, action) {
       return state;
   }
 }
+//context
+export const boardDispatchContext = createContext();
+export const boardStateContext = createContext();
+
 function App() {
   const mockup = [
     {
@@ -33,6 +37,8 @@ function App() {
   ];
   const [board, dispatch] = useReducer(reducer, mockup);
   const ref = useRef(1);
+
+  //usecallback 사용시
 
   const onDelete = (id) => {
     dispatch({
@@ -61,11 +67,19 @@ function App() {
     });
   };
 
+  const memoDispatch = useMemo(() => {
+    return { onInsert, onUpdate, onDelete };
+  }, []);
+
   return (
     <div className="main">
       <Header />
-      <InsertPage onInsert={onInsert} />
-      <SelectPage board={board} onDelete={onDelete} onUpdate={onUpdate} />
+      <boardStateContext.Provider value={board}>
+        <boardDispatchContext.Provider value={memoDispatch}>
+          <InsertPage />
+          <SelectPage />
+        </boardDispatchContext.Provider>
+      </boardStateContext.Provider>
     </div>
   );
 }
