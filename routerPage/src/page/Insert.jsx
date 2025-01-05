@@ -19,6 +19,7 @@ const Insert = () => {
       refContent.current.value,
       refPassword.current.value
     );
+    alert("등록되었습니다.");
     nav("/");
   };
 
@@ -26,7 +27,7 @@ const Insert = () => {
     <>
       <HeaderSection
         b1="홈으로"
-        b2="저장"
+        b2="등록"
         onClick1={() => {
           nav("/");
         }}

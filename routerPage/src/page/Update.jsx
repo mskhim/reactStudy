@@ -1,13 +1,20 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import HeaderSection from "../components/HeaderSection";
 import "./Update.css"; // CSS 파일 분리
+import { useContext, useRef, useState } from "react";
+import { dispatchContext } from "../App";
 
 const Update = () => {
   const nav = useNavigate();
+  const board = useLocation().state;
+  const { onUpdate } = useContext(dispatchContext);
+  const [title, setTitle] = useState(board.title);
+  const [content, setContent] = useState(board.content);
 
   const handleUpdate = () => {
     // 업데이트 로직 추가 가능
-    console.log("업데이트 버튼 클릭");
+    onUpdate(board.id, title, content);
+    alert("업데이트되었습니다." + title + content + board.id);
     nav("/"); // 업데이트 후 홈으로 이동
   };
 
@@ -29,6 +36,8 @@ const Update = () => {
             id="title"
             placeholder="제목을 수정하세요"
             className="form-input"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -37,17 +46,11 @@ const Update = () => {
             id="content"
             placeholder="내용을 수정하세요"
             className="form-textarea"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
           ></textarea>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">비밀번호</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="비밀번호를 입력하세요"
-            className="form-input"
-          />
-        </div>
+        <div className="form-group"></div>
       </div>
     </>
   );

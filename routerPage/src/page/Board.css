@@ -96,3 +96,7 @@ cursor: pointer;
 .list-table td:nth-child(2) {
   width: 60%;
 }
+.icon{
+  font-size: 25px;
+  cursor: pointer;
+}

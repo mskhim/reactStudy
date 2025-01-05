@@ -12,7 +12,7 @@ const ListSection = ({ board, row }) => {
         <td>{row}</td>
         <td>{board.title}</td>
         <td>{board.name}</td>
-        <td>{board.rating}</td>
+        <td>{board.rating.toFixed(1)}</td>
         <td>{new Date(board.date).toLocaleDateString()}</td>
       </tr>
     </>

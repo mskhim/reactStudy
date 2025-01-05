@@ -18,9 +18,24 @@ function reducer(state, action) {
     case "UPDATE":
       return state.map((item) =>
         item.id === action.data.id
-          ? { ...item, content: action.content, title: action.title }
+          ? { ...item, content: action.data.content, title: action.data.title }
           : item
       );
+    case "UPDATERATE":
+      return state.map((item) => {
+        if (item.id === action.data.id) {
+          const rating =
+            (item.rating * item.ratingCount + parseInt(action.data.rating)) /
+            (item.ratingCount + 1);
+          return {
+            ...item,
+            rating: rating,
+            ratingCount: item.ratingCount + 1,
+          };
+        } else {
+          return item;
+        }
+      });
     default:
       return state;
   }
@@ -41,7 +56,7 @@ function App() {
   ];
   const [board, dispatch] = useReducer(reducer, mockdata);
 
-  const ref = useRef(0);
+  const ref = useRef(2);
 
   //입력메소드
   const onInsert = (name, title, content, password) => {
@@ -53,18 +68,20 @@ function App() {
         title: title,
         content: content,
         password: password,
-        date: new Date().toLocaleDateString(),
+        date: new Date().toISOString(),
         rating: 0.0,
         ratingCount: 0,
       },
     });
   };
+  //삭제메소드
   const onDelete = (id) => {
     dispatch({
       type: "DELETE",
       id: id,
     });
   };
+  //수정메소드
   const onUpdate = (id, title, content) => {
     dispatch({
       type: "UPDATE",
@@ -75,9 +92,19 @@ function App() {
       },
     });
   };
+  //평점메소드
+  const onRate = (id, rating) => {
+    dispatch({
+      type: "UPDATERATE",
+      data: {
+        id: id,
+        rating: rating,
+      },
+    });
+  };
 
   const memo = useMemo(() => {
-    return { onInsert, onDelete, onUpdate };
+    return { onInsert, onDelete, onUpdate, onRate };
   }, []);
   return (
     <>
