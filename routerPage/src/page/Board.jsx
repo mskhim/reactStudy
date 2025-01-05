@@ -18,6 +18,7 @@ const Board = () => {
   const [searchFlag, setSearchFlag] = useState(false);
   const [sortFlag, setSortFlag] = useState(true);
   const [row, setRow] = useState(board.length);
+  const [select, setSelect] = useState("date");
 
   useEffect(() => {
     setFilter(board);
@@ -40,9 +41,12 @@ const Board = () => {
       setFilter(board.filter((data) => data.name.includes(search)));
     }
     setRow(filter.length);
+    setSelect("date");
+    setSortFlag(true);
+    document.querySelector(".").value = "";
   };
   const clickClear = () => {
-    document.querySelector(".search-input").value = "";
+    setSelect("date");
     setFilter(board);
     setSearchFlag(false);
   };
@@ -52,8 +56,10 @@ const Board = () => {
     const sortFilter = [...filter];
     if (select === "date") {
       setFilter(sortFilter.sort((a, b) => new Date(b.date) - new Date(a.date)));
+      setSelect("date");
     } else {
       setFilter(sortFilter.sort((a, b) => b.rating - a.rating));
+      setSelect("rate");
     }
     setSortFlag(true);
   };
@@ -85,7 +91,7 @@ const Board = () => {
           {searchFlag || <Button text={"검색"} onClick={clickSearch} />}
 
           {searchFlag && <Button text={"검색취소"} onClick={clickClear} />}
-          <select className="list-select" onChange={changeSort}>
+          <select className="list-select" onChange={changeSort} value={select}>
             <option value="date">등록일순</option>
             <option value="rate">평점순</option>
           </select>

@@ -29,6 +29,7 @@ const Select = () => {
       return;
     } else onDelete(board.id);
     alert("삭제되었습니다.");
+    nav("/");
   };
   //평점입력 메소드
   const clickRate = () => {
