@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useNavigate } from "react-router-dom";
 import "./HeaderSection.css";
 import Button from "./Button";
@@ -14,4 +14,4 @@ const HeaderSection = ({ b1, b2, onClick1, onClick2 }) => {
   );
 };
 
-export default HeaderSection;
+export default memo(HeaderSection);

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import HeaderSection from "../components/HeaderSection";
+import { createBoard } from "../api/api";
 import "./Insert.css"; // CSS 파일 분리
-import { dispatchContext } from "../App";
 import { useContext, useRef } from "react";
 
 const Insert = () => {
@@ -11,14 +11,14 @@ const Insert = () => {
   const refContent = useRef();
   const refPassword = useRef();
 
-  const { onInsert } = useContext(dispatchContext);
-  const handleSave = () => {
-    onInsert(
-      refName.current.value,
-      refTitle.current.value,
-      refContent.current.value,
-      refPassword.current.value
-    );
+  const handleSave = async () => {
+    const board = {
+      title: refTitle.current.value,
+      content: refContent.current.value,
+      writer: refName.current.value,
+      password: refPassword.current.value,
+    };
+    await createBoard(board);
     alert("등록되었습니다.");
     nav("/");
   };
@@ -42,6 +42,7 @@ const Insert = () => {
             placeholder="제목을 입력하세요"
             className="form-input"
             ref={refTitle}
+            name="tltle"
           />
         </div>
         <div className="form-group">
@@ -51,6 +52,7 @@ const Insert = () => {
             placeholder="내용을 입력하세요"
             className="form-textarea"
             ref={refContent}
+            name="content"
           ></textarea>
         </div>
         <div className="form-group">
@@ -61,6 +63,7 @@ const Insert = () => {
             placeholder="작성자 이름을 입력하세요"
             className="form-input"
             ref={refName}
+            name="name"
           />
           <label htmlFor="password">비밀번호</label>
           <input
@@ -69,6 +72,7 @@ const Insert = () => {
             placeholder="비밀번호를 입력하세요"
             className="form-input"
             ref={refPassword}
+            name="password"
           />
         </div>
       </div>

@@ -8,14 +8,26 @@ import { boardContext, dispatchContext } from "../App";
 
 const Select = () => {
   const location = useLocation();
-  const boardId = location.state.id; // 선택한 게시물의 ID 가져오기
-  const board = useContext(boardContext).find((item) => item.id === boardId);
+  const board = location.state; // 선택한 게시물의 ID 가져오기
   const nav = useNavigate();
   const { onDelete, onRate } = useContext(dispatchContext);
   const pwdRef = useRef();
-
+  const formattedDate = new Date(board.regDate).toLocaleString("ko-KR", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
   //수정하기 클릭시 비밀번호 확인
   const clickUpdate = () => {
+    if (pwdRef.current.value === "") {
+      alert("비밀번호를 입력해주세요.");
+      pwdRef.current.focus();
+      return;
+    }
     if (pwdRef.current.value !== board.password) {
       alert("비밀번호가 일치하지 않습니다.");
       return;
@@ -24,6 +36,11 @@ const Select = () => {
   };
   //삭제하기 클릭시 비밀번호 확인
   const clickDelete = () => {
+    if (pwdRef.current.value === "") {
+      alert("비밀번호를 입력해주세요.");
+      pwdRef.current.focus();
+      return;
+    }
     if (pwdRef.current.value !== board.password) {
       alert("비밀번호가 일치하지 않습니다.");
       return;
@@ -48,10 +65,10 @@ const Select = () => {
       <div className="select-container">
         <div className="info-section">
           <p>
-            <strong>작성자:</strong> {board.name}
+            <strong>작성자:</strong> {board.writer}
           </p>
           <p>
-            <strong>작성일자:</strong> {new Date(board.date).toLocaleString()}
+            <strong>작성일자:</strong> {formattedDate}
           </p>
         </div>
         <div className="content-section">
@@ -60,7 +77,7 @@ const Select = () => {
         </div>
         <div className="rating-section">
           <div className="current-rating">
-            <strong>현재 평점:</strong> {board.rating.toFixed(1)}점
+            <strong>현재 평점:</strong> 3점
           </div>
           <div className="buttons-div">
             <div className="rating-input">

@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { fetchBoards } from "../api/api";
 import HeaderSection from "../components/HeaderSection";
 import ListSection from "../components/ListSection";
-import "./Board.css"; // CSS 파일 분리
+import "./Board.css";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import { boardContext } from "../App";
@@ -12,20 +13,29 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Board = () => {
+  const [boards, setBoards] = useState([]);
   const nav = useNavigate();
-  const board = useContext(boardContext);
-  const [filter, setFilter] = useState(board);
+  const [filter, setFilter] = useState(boards);
   const [searchFlag, setSearchFlag] = useState(false);
   const [sortFlag, setSortFlag] = useState(true);
-  const [row, setRow] = useState(board.length);
+  const [row, setRow] = useState(boards.length);
   const [select, setSelect] = useState("date");
 
   useEffect(() => {
-    setFilter(board);
-  }, [board]);
+    setFilter(boards);
+  }, [boards]);
   useEffect(() => {
     setRow(filter.length);
   }, [filter]);
+
+  useEffect(() => {
+    // API 호출하여 데이터 가져오기
+    const getBoards = async () => {
+      const data = await fetchBoards();
+      setBoards(data.reverse());
+    };
+    getBoards();
+  }, []);
 
   const clickSearch = () => {
     const search = document.querySelector(".search-input").value;
@@ -36,9 +46,9 @@ const Board = () => {
     const select = document.querySelector(".search-select").value;
     setSearchFlag(true);
     if (select === "title") {
-      setFilter(board.filter((data) => data.title.includes(search)));
+      setFilter(boards.filter((data) => data.title.includes(search)));
     } else {
-      setFilter(board.filter((data) => data.name.includes(search)));
+      setFilter(boards.filter((data) => data.name.includes(search)));
     }
     setRow(filter.length);
     setSelect("date");
@@ -47,7 +57,7 @@ const Board = () => {
   };
   const clickClear = () => {
     setSelect("date");
-    setFilter(board);
+    setFilter(boards);
     setSearchFlag(false);
   };
 
@@ -122,7 +132,7 @@ const Board = () => {
             </thead>
             <tbody>
               {filter.map((data, index) => (
-                <ListSection key={data.id} board={data} row={row - index} />
+                <ListSection key={data.no} board={data} row={row - index} />
               ))}
             </tbody>
           </table>

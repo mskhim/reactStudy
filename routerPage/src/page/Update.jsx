@@ -14,7 +14,7 @@ const Update = () => {
   const handleUpdate = () => {
     // 업데이트 로직 추가 가능
     onUpdate(board.id, title, content);
-    alert("업데이트되었습니다." + title + content + board.id);
+    alert("업데이트되었습니다.");
     nav("/"); // 업데이트 후 홈으로 이동
   };
 
