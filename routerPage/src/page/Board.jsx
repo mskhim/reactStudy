@@ -5,7 +5,6 @@ import ListSection from "../components/ListSection";
 import "./Board.css";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
-import { boardContext } from "../App";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowUpShortWide,
@@ -43,6 +42,7 @@ const Board = () => {
       alert("검색어를 입력해주세요.");
       return;
     }
+
     const select = document.querySelector(".search-select").value;
     setSearchFlag(true);
     if (select === "title") {
@@ -55,6 +55,7 @@ const Board = () => {
     setSortFlag(true);
     document.querySelector(".").value = "";
   };
+
   const clickClear = () => {
     setSelect("date");
     setFilter(boards);

@@ -3,15 +3,16 @@ import HeaderSection from "../components/HeaderSection";
 import "./Select.css"; // CSS 파일 분리
 import Button from "../components/Button";
 import { useLocation } from "react-router-dom";
-import { useContext, useEffect, useRef, useState } from "react";
-import { boardContext, dispatchContext } from "../App";
+import { useRef, useState } from "react";
+import { updateBoard, deleteBoard } from "../api/api";
 
 const Select = () => {
   const location = useLocation();
   const board = location.state; // 선택한 게시물의 ID 가져오기
   const nav = useNavigate();
-  const { onDelete, onRate } = useContext(dispatchContext);
   const pwdRef = useRef();
+  const [rate, setRate] = useState(board.rate);
+  const [ratecount, setRatecount] = useState(board.ratecount);
   const formattedDate = new Date(board.regDate).toLocaleString("ko-KR", {
     timeZone: "Asia/Seoul",
     year: "numeric",
@@ -44,14 +45,29 @@ const Select = () => {
     if (pwdRef.current.value !== board.password) {
       alert("비밀번호가 일치하지 않습니다.");
       return;
-    } else onDelete(board.id);
+    } else deleteBoard(board.no);
     alert("삭제되었습니다.");
     nav("/");
   };
   //평점입력 메소드
   const clickRate = () => {
-    const rate = document.querySelector(`.rating-select`).value;
-    onRate(board.id, rate);
+    const rate = document.querySelector(".rating-select").value;
+
+    let newrate =
+      (board.rate * board.ratecount + parseInt(rate)) / (board.ratecount + 1);
+    newrate = newrate.toFixed(2); // 소숫점 2자리까지 표시
+    console.log(newrate);
+    updateBoard(board.no, {
+      no: board.no,
+      title: board.title,
+      content: board.content,
+      writer: board.writer,
+      password: board.password,
+      rate: newrate,
+      ratecount: ratecount + 1,
+    });
+    setRate(newrate);
+    setRatecount(ratecount + 1);
     alert("평점이 입력되었습니다.");
   };
   return (
@@ -77,7 +93,7 @@ const Select = () => {
         </div>
         <div className="rating-section">
           <div className="current-rating">
-            <strong>현재 평점:</strong> 3점
+            <strong>현재 평점:</strong> {rate}점({ratecount}명)
           </div>
           <div className="buttons-div">
             <div className="rating-input">

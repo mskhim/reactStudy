@@ -19,7 +19,7 @@ const ListSection = ({ board, row }) => {
         <td>{row}</td>
         <td>{board.title}</td>
         <td>{board.writer}</td>
-        <td>{1}</td>
+        <td>{board.rate}</td>
         <td>{formattedDate}</td>
       </tr>
     </>

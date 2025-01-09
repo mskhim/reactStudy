@@ -1,19 +1,17 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import HeaderSection from "../components/HeaderSection";
 import "./Update.css"; // CSS 파일 분리
-import { useContext, useRef, useState } from "react";
-import { dispatchContext } from "../App";
-
+import { useState } from "react";
+import { updateBoard } from "../api/api";
 const Update = () => {
   const nav = useNavigate();
   const board = useLocation().state;
-  const { onUpdate } = useContext(dispatchContext);
   const [title, setTitle] = useState(board.title);
   const [content, setContent] = useState(board.content);
-
+  const [rate, setRate] = useState(board.rate);
   const handleUpdate = () => {
     // 업데이트 로직 추가 가능
-    onUpdate(board.id, title, content);
+    updateBoard(board.no, { ...board, title, content });
     alert("업데이트되었습니다.");
     nav("/"); // 업데이트 후 홈으로 이동
   };

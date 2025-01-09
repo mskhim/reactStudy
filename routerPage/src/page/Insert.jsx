@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import HeaderSection from "../components/HeaderSection";
 import { createBoard } from "../api/api";
 import "./Insert.css"; // CSS 파일 분리
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 
 const Insert = () => {
   const nav = useNavigate();
